@@ -1,0 +1,66 @@
+# ======================
+# Node / JavaScript
+# ======================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ======================
+# Environment variables
+# ======================
+.env
+.env.*
+!.env.example
+
+# ======================
+# Build outputs
+# ======================
+dist/
+build/
+coverage/
+
+# ======================
+# Vite / React
+# ======================
+.vite/
+.vite-cache/
+
+# ======================
+# TypeScript
+# ======================
+*.tsbuildinfo
+
+# ======================
+# Logs
+# ======================
+logs/
+*.log
+
+# ======================
+# OS / Editor junk
+# ======================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ======================
+# Supabase / DB temp
+# ======================
+supabase/.temp/
+supabase/.branches/
+
+# ======================
+# Socket / runtime temp
+# ======================
+*.pid
+*.pid.lock
+
+# ======================
+# Optional: uploads or temp assets
+# ======================
+uploads/
+tmp/
+temp/
