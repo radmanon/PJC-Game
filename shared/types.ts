@@ -1,17 +1,11 @@
-export type CardType = "PROD" | "UPG" | "FIN" | "SITE";
+// shared/types.ts
 
-export type DiceOutcome =
-    | { roll: 1; cardType: "PROD" }
-    | { roll: 2; cardType: "UPG" }
-    | { roll: 3; cardType: "FIN" }
-    | { roll: 4; cardType: "SITE" }
-    | { roll: 5; cardType: "CHOICE" }
-    | { roll: 6; cardType: "NONE" };
+export type CardType = "FIN" | "SITE" | "UPG" | "PROD" | "CHOICE" | "NONE";
 
 export type Dependency =
+    | { type: "NONE" }
     | { type: "FS"; on: string[] }
-    | { type: "SS"; with: string[] }
-    | { type: "NONE" };
+    | { type: "SS"; with: string[] };
 
 export type Activity = {
     id: string;
@@ -23,42 +17,69 @@ export type Activity = {
     dep: Dependency;
 };
 
-export type PlayerState = {
-    id: string; // server-generated
-    nickname: string;
-    bp: number;
-    coins: number;
-    workers: number;
-    machines: number;
-    productivity: number;
-    time: number;
-    activityIndex: number;
-    buffs: {
-        id: string;
-        remainingTurns: number;
-        effect: "TIME_MINUS_1" | "COST_MINUS_1" | "IGNORE_SITE_ONCE";
-    }[];
+export type Buff = {
+    id: string;
+    remainingTurns: number;
+    effect: "TIME_MINUS_1" | "COST_MINUS_1" | "IGNORE_SITE_ONCE";
 };
 
-export type DeckState = {
-    draw: string[];     // card IDs
-    discard: string[];  // card IDs
+export type PlayerState = {
+    id: string;
+    nickname: string;
+
+    bp: number;
+    coins: number;
+
+    workers: number;
+    machines: number;
+
+    productivity: number;
+    time: number;
+
+    // Old field (kept for compatibility / UI)
+    activityIndex: number;
+
+    // ✅ New: allows activity-choice gameplay
+    completedActivityIds?: string[];
+
+    buffs: Buff[];
 };
+
+export type DiceOutcome = {
+    roll: 1 | 2 | 3 | 4 | 5 | 6;
+    cardType: CardType;
+};
+
+export type DeckState = { draw: string[]; discard: string[] };
 
 export type GameState = {
     roomCode: string;
     status: "LOBBY" | "ACTIVE" | "FINISHED";
     hostPlayerId: string;
+
     round: number;
     turnIndex: number;
+
     players: PlayerState[];
     activities: Activity[];
-    decks: Record<"FIN" | "SITE" | "UPG" | "PROD", DeckState>;
+
+    decks: {
+        FIN: DeckState;
+        SITE: DeckState;
+        UPG: DeckState;
+        PROD: DeckState;
+    };
+
+    log: string[];
+
     currentTurn?: {
         activePlayerId: string;
+
         roll?: number;
-        cardType?: CardType | "CHOICE" | "NONE";
+        cardType?: CardType;
         offeredCardIds?: string[];
+
+        // ✅ New: chosen activity for this turn (optional)
+        selectedActivityId?: string;
     };
-    log: string[];
 };

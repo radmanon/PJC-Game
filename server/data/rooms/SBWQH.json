@@ -1,32 +1,33 @@
 {
-  "roomCode": "78E99",
+  "roomCode": "SBWQH",
   "status": "ACTIVE",
-  "hostPlayerId": "50b5c4de-a305-4efe-9096-d4a90f86f182",
-  "round": 3,
+  "hostPlayerId": "de2c80eb-e4e6-452c-b9d2-11cf27e639c0",
+  "round": 4,
   "turnIndex": 0,
   "players": [
     {
-      "id": "50b5c4de-a305-4efe-9096-d4a90f86f182",
+      "id": "de2c80eb-e4e6-452c-b9d2-11cf27e639c0",
       "nickname": "A",
-      "bp": 23,
-      "coins": 8,
-      "workers": 3,
-      "machines": 1,
-      "productivity": 0,
-      "time": 4,
-      "activityIndex": 2,
-      "buffs": []
-    },
-    {
-      "id": "47e53b11-b07a-40e5-8e7e-8bea6e0372ef",
-      "nickname": "B",
-      "bp": 24,
+      "bp": 21,
       "coins": 9,
       "workers": 3,
       "machines": 1,
       "productivity": 0,
       "time": 4,
-      "activityIndex": 2,
+      "activityIndex": 3,
+      "buffs": []
+    },
+    {
+      "id": "43f1e410-d15d-4a49-9b87-b56012baa650",
+      "nickname": "B",
+      "bp": 19,
+      "coins": 10,
+      "workers": 3,
+      "machines": 1,
+      "productivity": 0,
+      "time": 5,
+      "activityIndex": 3,
+      "completedActivityIds": [],
       "buffs": []
     }
   ],
@@ -607,98 +608,99 @@
   "decks": {
     "FIN": {
       "draw": [
-        "F04",
-        "F02",
-        "F06",
-        "F01",
-        "F09",
-        "F12",
-        "F05",
-        "F03",
-        "F08",
-        "F15",
+        "F11",
         "F14",
+        "F15",
+        "F04",
+        "F06",
+        "F12",
+        "F09",
+        "F01",
         "F07",
+        "F03",
         "F13",
-        "F11"
+        "F10"
       ],
       "discard": [
-        "F10"
+        "F05",
+        "F08",
+        "F02"
       ]
     },
     "SITE": {
       "draw": [
-        "S12",
-        "S08",
-        "S01",
-        "S05",
-        "S06",
-        "S02",
-        "S15",
-        "S04",
-        "S11",
-        "S13",
         "S07",
         "S14",
+        "S05",
+        "S08",
+        "S04",
+        "S12",
+        "S15",
+        "S06",
+        "S01",
+        "S13",
+        "S09",
+        "S02",
         "S03",
         "S10",
-        "S09"
+        "S11"
       ],
       "discard": []
     },
     "UPG": {
       "draw": [
-        "U05",
         "U13",
-        "U11",
-        "U09",
-        "U06",
-        "U01",
-        "U03",
-        "U08",
-        "U12",
-        "U14",
         "U04",
+        "U08",
+        "U11",
+        "U12",
+        "U05",
+        "U14",
         "U10",
-        "U07"
+        "U07",
+        "U03",
+        "U02",
+        "U09",
+        "U01"
       ],
       "discard": [
-        "U02",
-        "U15"
+        "U15",
+        "U06"
       ]
     },
     "PROD": {
       "draw": [
-        "P02",
-        "P04",
-        "P11",
-        "P13",
-        "P06",
-        "P08",
-        "P09",
         "P10",
         "P07",
-        "P01",
+        "P09",
+        "P13",
+        "P02",
+        "P06",
         "P03",
+        "P08",
+        "P04",
+        "P01",
         "P15",
         "P14",
-        "P05"
-      ],
-      "discard": [
+        "P11",
+        "P05",
         "P12"
-      ]
+      ],
+      "discard": []
     }
   },
   "log": [
-    "Room 78E99 created.",
+    "Room SBWQH created.",
     "B joined.",
     "Game started.",
-    "A executed A01 (Site Setup (Mobilization)) | +2w, -4BP, card=U02",
-    "B executed A01 (Site Setup (Mobilization)) | +2w, -4BP, card=F10",
-    "A executed A02 (Permits & Approvals) | +2w, -3BP, card=P12",
-    "B executed A02 (Permits & Approvals) | +2w, -2BP, card=U15"
+    "A executed A01 (Site Setup (Mobilization)) | +2w, -6BP, card=F05",
+    "B executed A01 (Site Setup (Mobilization)) | +2w, -4BP, card=U15",
+    "A executed A02 (Permits & Approvals) | +2w, -1BP, card=F08",
+    "B executed A02 (Permits & Approvals) | +2w, -3BP, card=NONE",
+    "A executed A03 (Surveying & Layout) | +0w, -2BP, card=U06",
+    "B executed A03 (Surveying & Layout) | +1w, -4BP, card=F02"
   ],
   "currentTurn": {
-    "activePlayerId": "50b5c4de-a305-4efe-9096-d4a90f86f182"
+    "activePlayerId": "de2c80eb-e4e6-452c-b9d2-11cf27e639c0"
   }
 }

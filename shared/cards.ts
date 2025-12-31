@@ -1,3 +1,4 @@
+// shared/cards.ts
 import type { CardType } from "./types";
 
 export type CardDef = {
@@ -6,10 +7,10 @@ export type CardDef = {
     title: string;
     rulesText: string;
     effect: {
-        timeDelta?: number; // weeks (+/-)
-        costDelta?: number; // BP (+/-)
-        prodDelta?: number; // productivity (+/-)
-        coinDelta?: number; // coins (+/-)
+        timeDelta?: number;
+        costDelta?: number;
+        prodDelta?: number;
+        coinDelta?: number;
         buff?: {
             effect: "TIME_MINUS_1" | "COST_MINUS_1" | "IGNORE_SITE_ONCE";
             turns: number;
@@ -90,6 +91,6 @@ export const CARDS: CardDef[] = [
 
 export const CARD_BY_ID = new Map<string, CardDef>(CARDS.map((c) => [c.id, c]));
 
-// ✅ IMPORTANT: Default export too (makes it work even if Node treats it like CJS)
-const CardsModule = { CARDS, CARD_BY_ID } as const;
+// ✅ This makes it work with CommonJS/ESM interop
+const CardsModule = { CARDS, CARD_BY_ID };
 export default CardsModule;

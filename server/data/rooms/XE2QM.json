@@ -1,0 +1,718 @@
+{
+  "roomCode": "XE2QM",
+  "status": "ACTIVE",
+  "hostPlayerId": "5ae485f1-12b1-457a-ab16-556cc4efd426",
+  "round": 6,
+  "turnIndex": 1,
+  "players": [
+    {
+      "id": "5ae485f1-12b1-457a-ab16-556cc4efd426",
+      "nickname": "A",
+      "bp": 11,
+      "coins": 4,
+      "workers": 3,
+      "machines": 1,
+      "productivity": 1,
+      "time": 12,
+      "activityIndex": 6,
+      "buffs": []
+    },
+    {
+      "id": "f9dea112-e416-4258-9fdb-0242f4b1c2ee",
+      "nickname": "B",
+      "bp": 13,
+      "coins": 8,
+      "workers": 3,
+      "machines": 1,
+      "productivity": 1,
+      "time": 10,
+      "activityIndex": 5,
+      "completedActivityIds": [],
+      "buffs": [
+        {
+          "id": "F10",
+          "remainingTurns": 1,
+          "effect": "COST_MINUS_1"
+        }
+      ]
+    }
+  ],
+  "activities": [
+    {
+      "id": "A01",
+      "name": "Site Setup (Mobilization)",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 1,
+      "dep": {
+        "type": "NONE"
+      }
+    },
+    {
+      "id": "A02",
+      "name": "Permits & Approvals",
+      "baseTime": 2,
+      "baseCost": 3,
+      "reqWorkers": 1,
+      "reqMachines": 0,
+      "dep": {
+        "type": "NONE"
+      }
+    },
+    {
+      "id": "A03",
+      "name": "Surveying & Layout",
+      "baseTime": 1,
+      "baseCost": 2,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A01",
+          "A02"
+        ]
+      }
+    },
+    {
+      "id": "A04",
+      "name": "Temporary Utilities & Fencing",
+      "baseTime": 1,
+      "baseCost": 2,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A01"
+        ]
+      }
+    },
+    {
+      "id": "A05",
+      "name": "Excavation",
+      "baseTime": 3,
+      "baseCost": 6,
+      "reqWorkers": 3,
+      "reqMachines": 2,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A03",
+          "A04"
+        ]
+      }
+    },
+    {
+      "id": "A06",
+      "name": "Dewatering (if needed)",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A05"
+        ]
+      }
+    },
+    {
+      "id": "A07",
+      "name": "Subbase / Compaction",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 3,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A06"
+        ]
+      }
+    },
+    {
+      "id": "A08",
+      "name": "Foundation Formwork",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A07"
+        ]
+      }
+    },
+    {
+      "id": "A09",
+      "name": "Foundation Rebar",
+      "baseTime": 2,
+      "baseCost": 6,
+      "reqWorkers": 4,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A08"
+        ]
+      }
+    },
+    {
+      "id": "A10",
+      "name": "Foundation Concrete Pour",
+      "baseTime": 1,
+      "baseCost": 6,
+      "reqWorkers": 4,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A09"
+        ]
+      }
+    },
+    {
+      "id": "A11",
+      "name": "Curing / Early Strength Gain",
+      "baseTime": 1,
+      "baseCost": 2,
+      "reqWorkers": 1,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A10"
+        ]
+      }
+    },
+    {
+      "id": "A12",
+      "name": "Waterproofing (Substructure)",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A11"
+        ]
+      }
+    },
+    {
+      "id": "A13",
+      "name": "Backfilling",
+      "baseTime": 2,
+      "baseCost": 3,
+      "reqWorkers": 2,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A12"
+        ]
+      }
+    },
+    {
+      "id": "A14",
+      "name": "Ground Floor Columns / Walls",
+      "baseTime": 3,
+      "baseCost": 7,
+      "reqWorkers": 4,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A13"
+        ]
+      }
+    },
+    {
+      "id": "A15",
+      "name": "Ground Floor Slab",
+      "baseTime": 2,
+      "baseCost": 7,
+      "reqWorkers": 4,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A14"
+        ]
+      }
+    },
+    {
+      "id": "A16",
+      "name": "Upper Floor Structure (Frame)",
+      "baseTime": 5,
+      "baseCost": 9,
+      "reqWorkers": 4,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A15"
+        ]
+      }
+    },
+    {
+      "id": "A17",
+      "name": "Staircase / Core",
+      "baseTime": 3,
+      "baseCost": 6,
+      "reqWorkers": 3,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A16"
+        ]
+      }
+    },
+    {
+      "id": "A18",
+      "name": "Roof Structure",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 3,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A17"
+        ]
+      }
+    },
+    {
+      "id": "A19",
+      "name": "Exterior Masonry / Blockwork",
+      "baseTime": 4,
+      "baseCost": 8,
+      "reqWorkers": 4,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A16"
+        ]
+      }
+    },
+    {
+      "id": "A20",
+      "name": "Windows & Exterior Doors",
+      "baseTime": 2,
+      "baseCost": 6,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A21"
+        ]
+      }
+    },
+    {
+      "id": "A21",
+      "name": "Façade / Cladding",
+      "baseTime": 3,
+      "baseCost": 8,
+      "reqWorkers": 3,
+      "reqMachines": 1,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A20"
+        ]
+      }
+    },
+    {
+      "id": "A22",
+      "name": "Roof Waterproofing / Membrane",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A18"
+        ]
+      }
+    },
+    {
+      "id": "A23",
+      "name": "Electrical Rough-in",
+      "baseTime": 3,
+      "baseCost": 7,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A24",
+          "A25"
+        ]
+      }
+    },
+    {
+      "id": "A24",
+      "name": "Plumbing Rough-in",
+      "baseTime": 3,
+      "baseCost": 7,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A23",
+          "A25"
+        ]
+      }
+    },
+    {
+      "id": "A25",
+      "name": "HVAC Rough-in",
+      "baseTime": 3,
+      "baseCost": 8,
+      "reqWorkers": 3,
+      "reqMachines": 1,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A23",
+          "A24"
+        ]
+      }
+    },
+    {
+      "id": "A26",
+      "name": "Fire Protection Rough-in",
+      "baseTime": 2,
+      "baseCost": 6,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A23",
+          "A24"
+        ]
+      }
+    },
+    {
+      "id": "A27",
+      "name": "Interior Partitions / Drywall Framing",
+      "baseTime": 3,
+      "baseCost": 6,
+      "reqWorkers": 4,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A19",
+          "A22"
+        ]
+      }
+    },
+    {
+      "id": "A28",
+      "name": "Plastering / Drywall Finishing",
+      "baseTime": 3,
+      "baseCost": 6,
+      "reqWorkers": 4,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A27"
+        ]
+      }
+    },
+    {
+      "id": "A29",
+      "name": "Floor Screed / Leveling",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A28"
+        ]
+      }
+    },
+    {
+      "id": "A30",
+      "name": "Ceiling Installation",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A31"
+        ]
+      }
+    },
+    {
+      "id": "A31",
+      "name": "Painting (Interior)",
+      "baseTime": 3,
+      "baseCost": 5,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A30"
+        ]
+      }
+    },
+    {
+      "id": "A32",
+      "name": "Flooring (Tile/Vinyl/etc.)",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 3,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A29",
+          "A31"
+        ]
+      }
+    },
+    {
+      "id": "A33",
+      "name": "Interior Doors & Hardware",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A32"
+        ]
+      }
+    },
+    {
+      "id": "A34",
+      "name": "Cabinetry / Built-ins",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A32"
+        ]
+      }
+    },
+    {
+      "id": "A35",
+      "name": "Electrical Fixtures & Testing",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A23",
+          "A30",
+          "A31"
+        ]
+      }
+    },
+    {
+      "id": "A36",
+      "name": "Plumbing Fixtures & Testing",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A24",
+          "A32"
+        ]
+      }
+    },
+    {
+      "id": "A37",
+      "name": "HVAC Commissioning",
+      "baseTime": 2,
+      "baseCost": 5,
+      "reqWorkers": 2,
+      "reqMachines": 1,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A25",
+          "A35"
+        ]
+      }
+    },
+    {
+      "id": "A38",
+      "name": "Exterior Paving / Walkways",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 1,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A39"
+        ]
+      }
+    },
+    {
+      "id": "A39",
+      "name": "Landscaping",
+      "baseTime": 2,
+      "baseCost": 3,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "SS",
+        "with": [
+          "A38"
+        ]
+      }
+    },
+    {
+      "id": "A40",
+      "name": "Final Inspection, Handover & Closeout",
+      "baseTime": 2,
+      "baseCost": 4,
+      "reqWorkers": 2,
+      "reqMachines": 0,
+      "dep": {
+        "type": "FS",
+        "on": [
+          "A33",
+          "A34",
+          "A35",
+          "A36",
+          "A37",
+          "A38",
+          "A39"
+        ]
+      }
+    }
+  ],
+  "decks": {
+    "FIN": {
+      "draw": [
+        "F09",
+        "F15",
+        "F11",
+        "F03",
+        "F02",
+        "F05",
+        "F01",
+        "F14",
+        "F07",
+        "F04",
+        "F13"
+      ],
+      "discard": [
+        "F08",
+        "F06",
+        "F10",
+        "F12"
+      ]
+    },
+    "SITE": {
+      "draw": [
+        "S12",
+        "S09",
+        "S11",
+        "S15",
+        "S04",
+        "S06",
+        "S01",
+        "S02",
+        "S03",
+        "S05",
+        "S13",
+        "S08",
+        "S07"
+      ],
+      "discard": [
+        "S10",
+        "S14"
+      ]
+    },
+    "UPG": {
+      "draw": [
+        "U01",
+        "U13",
+        "U08",
+        "U03",
+        "U12",
+        "U09",
+        "U06",
+        "U04",
+        "U05",
+        "U02",
+        "U15",
+        "U10",
+        "U07",
+        "U11",
+        "U14"
+      ],
+      "discard": []
+    },
+    "PROD": {
+      "draw": [
+        "P06",
+        "P07",
+        "P14",
+        "P01",
+        "P12",
+        "P03",
+        "P05",
+        "P02",
+        "P13",
+        "P10",
+        "P04"
+      ],
+      "discard": [
+        "P15",
+        "P11",
+        "P08",
+        "P09"
+      ]
+    }
+  },
+  "log": [
+    "Room XE2QM created.",
+    "B joined.",
+    "Game started.",
+    "A executed A01 (Site Setup (Mobilization)) | +3w, -4BP, card=S10",
+    "B executed A01 (Site Setup (Mobilization)) | +2w, -4BP, card=NONE",
+    "A executed A02 (Permits & Approvals) | +2w, -1BP, card=F08",
+    "B executed A02 (Permits & Approvals) | +2w, -3BP, card=P15",
+    "A executed A03 (Surveying & Layout) | +1w, -2BP, card=P11",
+    "B executed A03 (Surveying & Layout) | +1w, -2BP, card=P08",
+    "A executed A04 (Temporary Utilities & Fencing) | +0w, -2BP, card=S14",
+    "B executed A04 (Temporary Utilities & Fencing) | +1w, -2BP, card=P09",
+    "A executed A05 (Excavation) | +4w, -5BP, card=F06",
+    "B executed A05 (Excavation) | +4w, -6BP, card=F10",
+    "A executed A06 (Dewatering (if needed)) | +2w, -5BP, card=F12"
+  ],
+  "currentTurn": {
+    "activePlayerId": "f9dea112-e416-4258-9fdb-0242f4b1c2ee"
+  }
+}
