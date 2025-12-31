@@ -1,52 +1,53 @@
-import { supabase } from "./supabase";
-import { GameState } from "../../shared/types";
+import fs from "node:fs/promises";
+import path from "node:path";
+import * as ActivitiesModule from "../../shared/activities";
+import type { GameState } from "../../shared/types";
 
-// In-memory fallback so the game still works if Supabase is down/misconfigured
-const mem = new Map<string, GameState>();
+const DATA_DIR = path.join(process.cwd(), "data", "rooms");
+
+const ACTIVITIES =
+    (ActivitiesModule as any).default ??
+    (ActivitiesModule as any).ACTIVITIES ??
+    ActivitiesModule;
+
+async function ensureDir() {
+    await fs.mkdir(DATA_DIR, { recursive: true });
+}
+
+function roomFile(roomCode: string) {
+    return path.join(DATA_DIR, `${roomCode}.json`);
+}
 
 export async function saveGame(state: GameState) {
-    // Always write to memory first
-    mem.set(state.roomCode, state);
-
-    // Then try Supabase (optional)
-    try {
-        const { error } = await supabase.from("games").upsert({
-            room_code: state.roomCode,
-            state,
-            updated_at: new Date().toISOString()
-        });
-
-        if (error) {
-            console.warn("[saveGame] Supabase error:", error.message);
-        }
-    } catch (e: any) {
-        console.warn("[saveGame] Supabase exception:", e?.message ?? e);
-    }
+    await ensureDir();
+    const file = roomFile(state.roomCode);
+    await fs.writeFile(file, JSON.stringify(state, null, 2), "utf-8");
 }
 
 export async function loadGame(roomCode: string): Promise<GameState | null> {
-    // Prefer memory if available
-    const inMem = mem.get(roomCode);
-    if (inMem) return inMem;
-
-    // Try Supabase
     try {
-        const { data, error } = await supabase
-            .from("games")
-            .select("state")
-            .eq("room_code", roomCode)
-            .maybeSingle();
+        await ensureDir();
+        const file = roomFile(roomCode);
+        const raw = await fs.readFile(file, "utf-8");
+        const state = JSON.parse(raw) as GameState;
 
-        if (error) {
-            console.warn("[loadGame] Supabase error:", error.message);
-            return null;
-        }
+        // ✅ always hydrate activities from code and ensure it's a plain array
+        (state as any).activities = Array.isArray(ACTIVITIES)
+            ? ACTIVITIES
+            : (ACTIVITIES as any).default ?? [];
 
-        const state = (data?.state as GameState) ?? null;
-        if (state) mem.set(roomCode, state);
         return state;
-    } catch (e: any) {
-        console.warn("[loadGame] Supabase exception:", e?.message ?? e);
+    } catch (err: any) {
+        if (err?.code === "ENOENT") return null;
+        console.warn("[loadGame] failed:", err?.message ?? err);
         return null;
+    }
+}
+
+export async function deleteGame(roomCode: string) {
+    try {
+        await fs.unlink(roomFile(roomCode));
+    } catch (err: any) {
+        if (err?.code !== "ENOENT") console.warn("[deleteGame] failed:", err?.message ?? err);
     }
 }

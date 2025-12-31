@@ -5,7 +5,7 @@ export default function Room({
     roomId,
     nickname,
     playerId,
-    initialState,
+    initialState
 }: {
     roomId: string;
     nickname: string;
@@ -31,9 +31,6 @@ export default function Room({
 
     if (!state) return <div style={{ padding: 20 }}>Waiting for game state...</div>;
 
-    const isActive = state.status === "ACTIVE";
-
-    // Normalize activities to an array
     const activitiesArr = useMemo(() => {
         const a = state?.activities;
         if (Array.isArray(a)) return a;
@@ -41,7 +38,6 @@ export default function Room({
         return [];
     }, [state]);
 
-    // Identify me by playerId (reliable)
     const me = useMemo(() => {
         return (
             state?.players?.find((p: any) => p.id === playerId) ??
@@ -51,7 +47,11 @@ export default function Room({
     }, [state, playerId, nickname]);
 
     const activeId = useMemo(() => {
-        return state.currentTurn?.activePlayerId ?? state.players?.[state.turnIndex]?.id ?? null;
+        return (
+            state.currentTurn?.activePlayerId ??
+            state.players?.[state.turnIndex]?.id ??
+            null
+        );
     }, [state]);
 
     const hostId = useMemo(() => {
@@ -61,8 +61,14 @@ export default function Room({
     const isMyTurn = !!me?.id && activeId === me.id;
     const isHost = !!me?.id && hostId === me.id;
 
+    const gameIsActive = state.status === "ACTIVE";
+    const canAct = gameIsActive && isMyTurn;
+
     const activeName =
         state.players.find((p: any) => p.id === activeId)?.nickname ?? "?";
+
+    const canRoll = isMyTurn && state.status === "ACTIVE";
+    const canApply = isMyTurn && state.status === "ACTIVE" && !!state.currentTurn?.roll;
 
     function activityLabel(activityIndex: number) {
         const act = activitiesArr?.[activityIndex];
@@ -71,11 +77,6 @@ export default function Room({
         const name = act.name ?? "";
         return `${id} ${name}`.trim();
     }
-
-    const hasRolled = !!state.currentTurn?.roll;
-
-    const canRoll = isActive && isMyTurn;
-    const canApply = isActive && isMyTurn && hasRolled;
 
     return (
         <div style={{ padding: 20 }}>
@@ -140,24 +141,23 @@ export default function Room({
                 </div>
             </div>
 
-            {isMyTurn ? (
+            {!gameIsActive ? (
+                <p style={{ marginTop: 10 }}>Waiting for host to start the game...</p>
+            ) : canAct ? (
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 10 }}>
-                    <button disabled={!canRoll} onClick={() => socket.emit("turn:roll", {})}>
-                        Roll Dice
-                    </button>
+                        <button disabled={!canRoll} onClick={() => socket.emit("turn:roll", {})}>
+                            Roll Dice
+                        </button>
 
-                    <button
-                        disabled={!canApply}
-                        onClick={() => socket.emit("turn:apply", { coinsSpent: 0 })}
-                    >
-                        Take Top Card (0 coins)
-                    </button>
+                        <button disabled={!canApply} onClick={() => socket.emit("turn:apply", { coinsSpent: 0 })}>
+                            Take Top Card (0 coins)
+                        </button>
                 </div>
             ) : (
-                <p>Waiting...</p>
+                <p style={{ marginTop: 10 }}>Waiting...</p>
             )}
 
-            <hr/>
+            <hr />
 
             <h4>Log</h4>
             <div style={{ maxHeight: 220, overflow: "auto", border: "1px solid #ddd", padding: 8 }}>
